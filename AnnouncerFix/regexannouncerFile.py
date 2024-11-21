@@ -87,6 +87,6 @@ def modify_file(input_file, output_file, pykeFlag):
 # Example usage
 input_file = 'map11.py'
 output_file = 'map11_replace.py'
-pykeFlag = False
+pykeFlag = False # if changing for Pyke announcer, change to True, otherwise leave False.
 
 modify_file(input_file, output_file, pykeFlag)
