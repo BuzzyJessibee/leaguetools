@@ -54,9 +54,9 @@ def modify_soundkey(text, pykeFlag):
         #print('Map Event!')
         if pykeFlag:
             if eventString == '_StartGameMessage1Map':
-                modified_text = re.sub(pattern, pyke_map1_replacement, text)
-            else:
                 modified_text = re.sub(pattern, pyke_map2_replacement, text)
+            else:
+                modified_text = re.sub(pattern, pyke_map1_replacement, text)
         else:
             modified_text = re.sub(pattern, replacement_mapThings, text)
 
