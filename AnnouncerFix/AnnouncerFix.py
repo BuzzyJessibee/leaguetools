@@ -1,8 +1,29 @@
-# AnnouncerFix Python Script by buzzyjessibee
-# Correct as of 14.23
-# Special Thanks to Leischii, Sweet Braised Slime, SirDexal
+#  This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# AnnouncerFix Python Script - Copyright (C) 2025 buzzyjessibee
+#                      __
+#                     // \
+#                     \\_/ //
+#   ''-.._.-''-.._.. -(||)(')
+#                     '''
+#
+
+# Correct as of 15.2
+# Special Thanks to Leischii, Slime, and SirDexal
 
 import re
+import argparse
 
 def modify_soundkey(text, pykeFlag):
     oddOnes = ['_Ace', '_PlayerDisconnectYourTeam', '_FirstBlood']
@@ -67,26 +88,37 @@ def modify_soundkey(text, pykeFlag):
     return modified_text
 
 # Function to modify the file
-def modify_file(input_file, output_file, pykeFlag):
+def modify_file(input_file, pykeFlag):
     pattern = r'("Play_vo_Announcer_)(@voice@)(_[a-zA-Z0-3]+)(.*)'
-    # Open the input file for reading and the output file for writing
-    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
-        # Read through each line in the input file
-        for line in infile:
-            # Apply the regex replacement only if the line matches the pattern
-            match = re.search(pattern, line)
 
-            if match:
-                modified_line = modify_soundkey(line, pykeFlag)
-            else:
-                modified_line = line
+    with open(input_file, 'r') as infile:
+        lines = infile.readlines()
 
-            # Write the modified (or unchanged) line to the output file
-            outfile.write(modified_line)
+    for i, line in enumerate(lines):
+        match = re.search(pattern, line)
 
-# Example usage
-input_file = 'map11.py'
-output_file = 'map11_replace.py'
-pykeFlag = False # if changing for Pyke announcer, change to True, otherwise leave False.
+        if match: # Modify the line if it matches the pattern
+            lines[i] = modify_soundkey(line, pykeFlag)
+        else: # Leave the line unchanged if it doesn't match
+            lines[i] = line
 
-modify_file(input_file, output_file, pykeFlag)
+    # Overwrite the original file with the modified content
+    with open(input_file, 'w') as outfile:
+        outfile.writelines(lines)
+
+# Command Line Parser
+parser = argparse.ArgumentParser()
+parser.add_argument("map", choices=["Map11", "Map12"], help="The map file to be used (either Map11 or Map12).")
+parser.add_argument("-p", "--pyke", help="Flag to enable Pyke specific changes", action="store_true")
+args = parser.parse_args()
+
+if args.map == "Map11":
+    print("Map11 selected. Running Map11-specific logic...")
+    input_file = 'temp\map11.py'
+else:
+    print("Map12 selected. Running Map12-specific logic...")
+    input_file = 'temp\map12.py'
+
+pykeFlag = args.pyke # if changing for Pyke announcer. Run program with -p for True, otherwise leave False.
+
+modify_file(input_file, pykeFlag)
