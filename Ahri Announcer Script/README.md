@@ -13,6 +13,9 @@ Please feel free to fork this project, to use with other announcers (or mods!)
 - `cdtb` which can be downloaded using `pip3 install cdtb` - Source at [https://github.com/CommunityDragon/CDTB](https://github.com/CommunityDragon/CDTB)
 - The script expects League to be installed in the default Windows location (`C:\Riot Games\League of Legends\`). If your League is installed somewhere else, you will need to change lines 42-45 to reference your install location.
 
+## PowerShell Security
+Because the script isn't signed, it won't run on most setups. In order to allow the script to run, but not disable the security entirely, you can disable the security for just the session that is running by running the command `pwsh.exe -ExecutionPolicy Unrestricted` and then running the script again. It will ask if you want to run the script, enter `R` and then hit enter. The script should run!
+
 ## Setup
 Folder Structure should look like this in order for the script to work properly:
 
