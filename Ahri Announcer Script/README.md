@@ -3,6 +3,9 @@
 Utilizes PowerShell and Python to automate the Star Guardian Ahri League of Legends announcer mod.
 Please feel free to fork this project, to use with other announcers (or mods!)
 
+## Video Tutorial
+[https://www.youtube.com/watch?v=rT_sWqCz2uQ](https://www.youtube.com/watch?v=rT_sWqCz2uQ)
+
 ## Pre-Requisites
 - `cslol-tools` which is downloaded along with [cslol-manager](https://github.com/LeagueToolkit/cslol-manager).
 - `ritobin` which can be downloaded from [https://github.com/moonshadow565/ritobin](https://github.com/moonshadow565/ritobin). 
